@@ -58,6 +58,26 @@ namespace BookRegistrationEF
 			context.SaveChanges();
 		}
 
+		public static void Delete(Book b)
+		{
+			var context = new BookContext();
+			//lets the context know that b is in it.
+			context.Book.Add(b);
 
+			context.Entry(b).State = EntityState.Deleted;
+		}
+
+		//Connected scenario where the DB context
+		//tracks entities in memory
+		public static void Delete(string isbn)
+		{
+			var context = new BookContext();
+			//pull book from DB to make EF track it.
+			Book bookToDelete = context.Book.Find(isbn);
+			//mark book as deleted
+			context.Book.Remove(bookToDelete);
+
+			context.SaveChanges();
+		}
 	}
 }
