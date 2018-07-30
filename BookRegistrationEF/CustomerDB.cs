@@ -16,5 +16,17 @@ namespace BookRegistrationEF
 
 			return context.Customer.ToList();
 		}
+		/// <summary>
+		/// adds customer to DB
+		/// </summary>
+		/// <param name="c">the customer you are adding.</param>
+		public static void Add(Customer c)
+		{
+			var context = new BookContext();
+
+			context.Customer.Add(c);
+
+			context.SaveChanges();
+		}
 	}
 }
