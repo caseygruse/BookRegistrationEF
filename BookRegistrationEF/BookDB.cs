@@ -15,5 +15,20 @@ namespace BookRegistrationEF
 			List<Book> allBooks = (from b in context.Book select b).ToList();
 			return allBooks;
 		}
+
+		/// <summary>
+		/// adds book to the database
+		/// </summary>
+		/// <param name="b">The book to be added!</param>
+		public static void Add(Book b)
+		{
+			//create context
+			BookContext context = new BookContext();
+			//add book to db
+			context.Book.Add(b);
+			//saves changes
+			context.SaveChanges();
+
+		}
 	}
 }
